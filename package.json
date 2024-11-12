@@ -5,6 +5,7 @@
   "description": "Search open tabs, bookmarks and history in Google Chrome.",
   "icon": "chrome-icon.png",
   "author": "Codely",
+  "owner": "sakura",
   "contributors": [
     "bromanko",
     "crisboarna",
@@ -14,7 +15,8 @@
     "Aiee",
     "nagauta",
     "a-laughlin",
-    "tleo19"
+    "tleo19",
+    "sakura"
   ],
   "license": "MIT",
   "commands": [
