@@ -19,7 +19,7 @@ const getHistoryQuery = (table: string, date_field: string, terms: string[]) =>
                      'localtime') as lastVisited
      FROM ${table}
      WHERE ${whereClauses(table, terms)}
-     ORDER BY ${date_field} DESC LIMIT 30;`;
+     ORDER BY ${date_field} DESC LIMIT 6;`;
 
 const searchHistory = (profile: string, query?: string): SearchResult<HistoryEntry> => {
   const terms = query ? query.trim().split(" ") : [""];

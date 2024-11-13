@@ -1,7 +1,7 @@
-import { getPreferenceValues, List,Icon } from "@raycast/api";
+import { getPreferenceValues, List, Icon } from "@raycast/api";
 import { useState } from "react";
 import { Preferences } from "./interfaces";
-import { ChromeActions,ChromeListItems } from "./components";
+import { ChromeActions, ChromeListItems } from "./components";
 import { useTabSearch } from "./hooks/useTabSearch";
 import { CHROME_PROFILE_KEY, DEFAULT_CHROME_PROFILE_ID } from "./constants";
 import { useHistorySearch } from "./hooks/useHistorySearch";
@@ -48,40 +48,19 @@ export default function Command() {
           icon={{ source: !searchText ? Icon.Plus : Icon.MagnifyingGlass }}
           actions={<ChromeActions.NewTab query={searchText} />}
         />
-      </List.Section>
-      {/* use Item for titles instead of sections for explicit feedback that the list is empty */}
-      <List.Section title="Tabs">
-        {tabData.length === 0 ? (
-          <List.Item title="No tabs found" key={"empty tab list item"} />
-        ) : (
+        {
           tabData.map((tab) => (
             <ChromeListItems.TabList key={tab.key()} tab={tab} useOriginalFavicon={useOriginalFavicon} />
           ))
-        )}
-      </List.Section>
-
-      {historyData.length === 0 ? (
-        <List.Section title="History">
-          <List.Item title="No history found" />
-        </List.Section>
-      ) : (
-        Array.from(groupEntriesByDate(historyData).entries(), ([groupDate, group]) => (
-          <List.Section title={"History " + groupDate} key={groupDate}>
-            {group.map((e) => (
-              <ChromeListItems.TabHistory key={e.id} entry={e} profile={profile} />
-            ))}
-          </List.Section>
-        ))
-      )}
-
-      <List.Section title="Bookmarks">
-        {bookmarkData.length === 0 ? (
-          <List.Item title="No bookmarks found" key={"empty bookmark list item"} />
-        ) : (
-          tabData.map((tab) => (
-            <ChromeListItems.TabList key={tab.key()} tab={tab} useOriginalFavicon={useOriginalFavicon} />
+        }
+        {
+          historyData.map((e) => (
+            <ChromeListItems.TabHistory key={e.id} entry={e} profile={profile} />
           ))
-        )}
+        }
+        {bookmarkData?.map((e) => (
+          <ChromeListItems.Bookmark key={e.id} entry={e} profile={profile} />
+        ))}
       </List.Section>
     </List>
   );
