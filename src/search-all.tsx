@@ -6,7 +6,6 @@ import { useTabSearch } from "./hooks/useTabSearch";
 import { CHROME_PROFILE_KEY, DEFAULT_CHROME_PROFILE_ID } from "./constants";
 import { useHistorySearch } from "./hooks/useHistorySearch";
 import { useCachedState } from "@raycast/utils";
-import { groupEntriesByDate } from "./search-history";
 import ChromeProfileDropDown from "./components/ChromeProfileDropdown";
 import { useBookmarkSearch } from "./hooks/useBookmarkSearch";
 
