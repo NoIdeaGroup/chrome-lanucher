@@ -74,7 +74,7 @@ export async function openNewTab({
     case SettingsProfileOpenBehaviour.Default:
       script =
         `
-        set winExists to false
+        set winExists to true
         tell application "Google Chrome"
             repeat with win in every window
                 if index of win is 1 then
