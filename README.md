@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Google Chrome Extension
 
 - Open new tabs in Google Chrome
@@ -15,7 +14,4 @@ Open profile support is limited to opening tab in new profile window. You can cu
 If you are using `Default` mode and have multiple profiles open in parallel, the tab will open in the topmost window.
 
 These are due to limitations in the Chrome API.
-=======
-# chrome-lanucher
 RayCast extension for chrome
->>>>>>> 345ef15be6a199dd40df4c00547f17fad06f4442
