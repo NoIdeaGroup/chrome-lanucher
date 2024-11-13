@@ -1,7 +1,7 @@
-import { getPreferenceValues, List } from "@raycast/api";
+import { getPreferenceValues, List,Icon } from "@raycast/api";
 import { useState } from "react";
 import { Preferences } from "./interfaces";
-import { ChromeListItems } from "./components";
+import { ChromeActions,ChromeListItems } from "./components";
 import { useTabSearch } from "./hooks/useTabSearch";
 import { CHROME_PROFILE_KEY, DEFAULT_CHROME_PROFILE_ID } from "./constants";
 import { useHistorySearch } from "./hooks/useHistorySearch";
@@ -42,6 +42,13 @@ export default function Command() {
       throttle={true}
       searchBarAccessory={<ChromeProfileDropDown onProfileSelected={revalidate} />}
     >
+      <List.Section key={"new-tab"} title={"New Tab"}>
+        <List.Item
+          title={!searchText ? "Open Empty Tab" : `Search "${searchText}"`}
+          icon={{ source: !searchText ? Icon.Plus : Icon.MagnifyingGlass }}
+          actions={<ChromeActions.NewTab query={searchText} />}
+        />
+      </List.Section>
       {/* use Item for titles instead of sections for explicit feedback that the list is empty */}
       <List.Section title="Tabs">
         {tabData.length === 0 ? (
