@@ -11,7 +11,7 @@ export class ChromeListItems {
   public static Bookmark = BookmarkItem;
 }
 
-function truncateString(str:string , maxLength:number): string {
+function truncateString(str: string, maxLength: number): string {
   if (str.length > maxLength) {
     return str.substring(0, maxLength) + '...';
   }
@@ -48,7 +48,7 @@ function TabListItem(props: { tab: Tab; useOriginalFavicon: boolean; onTabClosed
   return (
     <List.Item
       title={truncateString(props.tab.title, 40)}
-      subtitle={truncateString(props.tab.urlWithoutScheme(),40)}
+      subtitle={truncateString(props.tab.urlWithoutScheme(), 40)}
       keywords={[props.tab.urlWithoutScheme()]}
       actions={<ChromeActions.TabList tab={props.tab} onTabClosed={props.onTabClosed} />}
       icon={props.useOriginalFavicon ? props.tab.favicon : props.tab.googleFavicon()}
