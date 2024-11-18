@@ -4,6 +4,7 @@ import { Preferences, SearchResult, Tab } from "../interfaces";
 import { getPreferenceValues } from "@raycast/api";
 import { NOT_INSTALLED_MESSAGE } from "../constants";
 import { NotInstalledError, UnknownError } from "../components";
+import pinyin from "pinyin";
 
 /**
  * @name useTabSearch
@@ -24,11 +25,22 @@ export function useTabSearch(query = ""): SearchResult<Tab> & { data: NonNullabl
   const [errorView, setErrorView] = useState<ReactNode | undefined>();
   const queryParts = query.toLowerCase().split(/\s+/);
 
+  const getSearchableStr = (tab: Tab) => {
+    try {
+      const pinyinData: Array<Array<string>> = pinyin(tab.title, { style: 0, group: false, compact: true });
+      const finalPinyinStr = pinyinData[0].join("")
+      return `${tab.title.toLowerCase()} ${tab.urlWithoutScheme().toLowerCase()} ${finalPinyinStr}`;
+    } catch (e) {
+      console.error(e)
+      return `${tab.title.toLowerCase()} ${tab.urlWithoutScheme().toLowerCase()}`;
+    }
+  };
+
   useEffect(() => {
     getOpenTabs(useOriginalFavicon)
       .then((tabs) =>
         tabs
-          .map((tab): [Tab, string] => [tab, `${tab.title.toLowerCase()} ${tab.urlWithoutScheme().toLowerCase()}`])
+          .map((tab): [Tab, string] => [tab, getSearchableStr(tab)])
           .filter(([, searchable]) => queryParts.reduce((isMatch, part) => isMatch && searchable.includes(part), true))
           .map(([tab]) => tab)
       )

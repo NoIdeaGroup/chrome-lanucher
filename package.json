@@ -64,10 +64,13 @@
   "dependencies": {
     "@raycast/api": "^1.44.0",
     "@raycast/utils": "^1.4.13",
+    "ipinyinjs": "^1.0.0",
+    "pinyin": "^4.0.0-alpha.2",
     "run-applescript": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "18.8.3",
+    "@types/pinyin": "^2.10.2",
     "@types/react": "18.0.9",
     "@typescript-eslint/eslint-plugin": "^5.0.0",
     "@typescript-eslint/parser": "^5.0.0",
