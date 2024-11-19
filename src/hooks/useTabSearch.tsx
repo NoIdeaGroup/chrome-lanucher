@@ -27,7 +27,7 @@ export function useTabSearch(query = ""): SearchResult<Tab> & { data: NonNullabl
 
   const getSearchableStr = (tab: Tab) => {
     try {
-      const pinyinData: Array<Array<string>> = pinyin(tab.title, { style: 0, group: false, compact: true });
+      const pinyinData: Array<Array<string>> = pinyin(tab.title, { style: 0, group: false});
       const finalPinyinStr = pinyinData[0].join("")
       return `${tab.title.toLowerCase()} ${tab.urlWithoutScheme().toLowerCase()} ${finalPinyinStr}`;
     } catch (e) {
