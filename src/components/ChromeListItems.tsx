@@ -3,7 +3,6 @@ import { ReactElement } from "react";
 import { getFavicon } from "@raycast/utils";
 import { List } from "@raycast/api";
 import { ChromeActions } from ".";
-import { text } from "stream/consumers";
 
 export class ChromeListItems {
   public static TabList = TabListItem;
@@ -11,22 +10,16 @@ export class ChromeListItems {
   public static Bookmark = BookmarkItem;
 }
 
-function truncateString(str: string, maxLength: number): string {
-  if (str.length > maxLength) {
-    return str.substring(0, maxLength) + '...';
-  }
-  return str;
-}
-
 function HistoryItem({ profile, entry: { url, title, id } }: { entry: HistoryEntry; profile: string }): ReactElement {
+  console.log(title)
   return (
     <List.Item
       id={`${profile}-${id}`}
-      title={truncateString(title, 40)}
-      subtitle={truncateString(url, 40)}
+      title={title}
+      subtitle={url}
       icon={getFavicon(url)}
       actions={<ChromeActions.TabHistory title={title} url={url} profile={profile} />}
-      accessories={[{ text: `🛜History` }]}
+      accessories={[{ text: `🛜` }]}
     />
   );
 }
@@ -35,11 +28,11 @@ function BookmarkItem({ profile, entry: { url, title, id } }: { entry: HistoryEn
   return (
     <List.Item
       id={`${profile}-${id}`}
-      title={truncateString(title, 40)}
-      subtitle={truncateString(url, 40)}
+      title={title}
+      subtitle={url}
       icon={getFavicon(url)}
       actions={<ChromeActions.TabHistory title={title} url={url} profile={profile} />}
-      accessories={[{ text: `⭐️Bookmark` }]}
+      accessories={[{ text: `⭐️` }]}
     />
   );
 }
@@ -47,12 +40,12 @@ function BookmarkItem({ profile, entry: { url, title, id } }: { entry: HistoryEn
 function TabListItem(props: { tab: Tab; useOriginalFavicon: boolean; onTabClosed?: () => void }) {
   return (
     <List.Item
-      title={truncateString(props.tab.title, 40)}
-      subtitle={truncateString(props.tab.urlWithoutScheme(), 40)}
+      title={props.tab.title}
+      subtitle={props.tab.urlWithoutScheme()}
       keywords={[props.tab.urlWithoutScheme()]}
       actions={<ChromeActions.TabList tab={props.tab} onTabClosed={props.onTabClosed} />}
       icon={props.useOriginalFavicon ? props.tab.favicon : props.tab.googleFavicon()}
-      accessories={[{ text: `🌎Tab` }]}
+      accessories={[{ text: `🌎` }]}
     />
   );
 }
